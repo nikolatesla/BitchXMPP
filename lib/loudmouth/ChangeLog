@@ -1,0 +1,1870 @@
+2007-02-02  Mikael Hallendal  <micke@imendio.com>
+
+	* Release 1.2.0
+
+	* NEWS:
+	* configure.ac:
+	- Updated for 1.2.0
+
+2007-01-05  Mikael Hallendal  <micke@imendio.com>
+
+	* python/*: Removed. Yay SVN!
+
+2007-01-05  Mikael Hallendal  <micke@imendio.com>
+
+	* mono/*: Removed, unfinished, outdated and doesn't build.
+
+2006-12-23  Mikael Hallendal  <micke@imendio.com>
+
+	* Release 1.1.5
+
+	* NEWS:
+	* configure.ac:
+	- Updated for 1.1.5
+
+2006-12-06  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-ssl-gnutls.c: (_lm_ssl_begin):
+	- Fixed a warning on 64 bit alpha.
+	- Fixes LM-41.
+
+2006-11-17  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.h:
+	- Removed a typo slash, reported by Dafydd Harries.
+	* loudmouth/lm-parser.c: (parser_error_cb), (lm_parser_parse):
+	- Don't free the parser in the parser callback.
+	- Patch from Sjoerd Simons.
+
+2006-11-14  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c:
+	(lm_connection_authenticate_and_block):
+	- Fixed a memory leak reported by Ganapati Kundapur.
+	- Fixes LM-66.
+
+2006-10-22  Richard Hult  <richard@imendio.com>
+
+	* loudmouth/lm-connection.c (connection_do_close)
+	(lm_connection_send_with_reply_and_block): 
+	- Check that we have the source before removing it and set the pointer 
+	  to NULL.
+	- Fixes LM-60.
+
+2006-10-17  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-message-node.c: (lm_message_node_to_string):
+	- Small fixup of the previous LM-48 fix.
+
+2006-10-16  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (_lm_connection_succeeded),
+	(_lm_connection_failed_with_error), (connection_do_open),
+	(connection_do_close), (lm_connection_new):
+	- Keep a reference to LmConnectData and remove the source if connect
+	  is cancelled before the connection is open.
+	- Fixes LM-59.
+	* loudmouth/lm-message-node.c: (lm_message_node_to_string):
+	- Use GString to build message node XML.
+	- Escape the attribute values unless raw-mode is specified.
+	- Fixes LM-48.
+	- Patch from Dafydd Harries.
+
+2006-09-21  Mikael Hallendal  <micke@imendio.com>
+
+	* NEWS:
+	* configure.ac:
+	- Updated for 1.1.4
+
+2006-09-21  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (_lm_connection_succeeded),
+	(_lm_connection_failed_with_error), (connection_buffered_write_cb),
+	(connection_do_close):
+	- Check that we find a resource before trying to destroy it.
+	- Fixes warning described in LM-50.
+
+
+2006-09-21  Richard Hult  <richard@imendio.com>
+
+	* loudmouth/lm-connection.c (connection_connect_cb): 
+	* loudmouth/lm-proxy.c (_lm_proxy_connect_cb): 
+	- Initialize len, fixes some random bugs on connection errors, where 
+	  the error code returned is random numbers.
+	- Fixes LM-58.
+
+2006-09-13  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (connection_free):
+	- Unref the proxy if set, plugs a leak.
+	- Fixes LM-51.
+
+2006-09-11  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-utils.c: (_lm_utils_generate_id):
+	- Generate more unique IDs, fixes LM-56.
+
+2006-09-11  Mikael Hallendal  <micke@imendio.com>
+
+	* Release 1.1.3
+
+2006-09-11  Mikael Hallendal  <micke@imendio.com>
+
+	* configure.ac:
+	* NEWS:
+	- Updated for 1.1.3
+
+2006-09-10  Mikael Hallendal  <micke@imendio.com>
+
+	* configure.ac:
+	* loudmouth/Makefile.am:
+	* tests/Makefile.am:
+	* tests/parser-tests/*:
+	* tests/test-parser.c: 
+	- Some more work on unit tests for the parser.
+
+2006-09-08  Mikael Hallendal  <micke@imendio.com>
+
+	* tests/Makefile.am:
+	* tests/test-parser.c:
+	- Added, base for parser unit tests.
+
+2006-09-06  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-ssl-openssl.c: (ssl_verify_certificate):
+	- Implemented.
+
+2006-09-01  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (lm_connection_new_with_context),
+	(lm_connection_send_raw):
+	* loudmouth/lm-message-handler.c: (lm_message_handler_new),
+	(lm_message_handler_is_valid):
+	* loudmouth/lm-message-node.c: (lm_message_node_add_child),
+	(lm_message_node_set_attribute), (lm_message_node_get_attribute),
+	(lm_message_node_get_child), (lm_message_node_find_child):
+	* loudmouth/lm-parser.c:
+	* loudmouth/lm-utils.c: (_lm_utils_hostname_to_punycode),
+	(lm_utils_get_localtime):
+	- Patch from Martyn to add argument checks all around.
+
+2006-08-23  Martyn Russell  <martyn@imendio.com>
+
+	* examples/lm-send-async.c:
+	* examples/lm-send-sync.c: 
+	* examples/test-lm.c: Make use of lm_connection_set_jid() and make
+	sure we only use the part before the '@' for the username when
+	authenticating, this means that these test clients will now work
+	with GoogleTalk.
+
+2006-08-22  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-message-node.c: (lm_message_node_to_string):
+	- Add a check that node isn't NULL.
+
+2006-08-04  Mikael Hallendal  <micke@imendio.com>
+
+	* acinclude.m4: 
+	- Fix a auto* warning.
+	- Fixes LM-46.
+
+2006-08-03  Richard Hult  <richard@imendio.com>
+
+	* loudmouth/lm-sha.c: 
+	- Make the sha functions static so they are not exposed to 
+	  apps/libraries using loudmout.
+	- Fixes LM-47.
+
+2006-08-01  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-ssl-gnutls.c: (_lm_ssl_read):
+	- EOF on 0 bytes read.
+	- Fixes LM-45.
+
+2006-06-27  Mikael Hallendal  <micke@imendio.com>
+
+	* Release 1.1.2
+
+	* configure.ac: 
+	- Bumped to 1.1.2
+	* NEWS:
+	- Added news about 1.1.2
+
+2006-06-25  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (lm_connection_close):
+	- Patch from Martyn Russel
+	- Make sure that disconnect is signalled if the connection is closed
+	  during opening phase.
+	- Fixes LM-43
+
+2006-06-16  Mikael Hallendal  <micke@imendio.com>
+
+	* configure.ac:
+	* loudmouth-1.0.pc.in:
+	* loudmouth/Makefile.am:
+	- Add checks for libidn.
+	* loudmouth/lm-connection.c: (lm_connection_new),
+	(lm_connection_set_server):
+	* loudmouth/lm-proxy.c: (lm_proxy_set_server):
+	- Use the new function _lm_utils_hostname_to_punycode.
+	* loudmouth/lm-internals.h:
+	* loudmouth/lm-utils.c: (_lm_utils_hostname_to_punycode):
+	- Added function to support internationalised host names.
+	- Patch from Frederic Peters.
+	- Fixes LM-42.
+
+2006-06-06  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (connection_free):
+	- Call lm_parser_free to actually free it.
+	* loudmouth/lm-parser.c: (lm_parser_free):
+	- Free up memory used by the parser.
+	- Fixes LM-39
+
+2006-05-27  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-ssl-gnutls.c: (ssl_verify_certificate):
+	- Fixed an error with an uninitialized value.
+	- Fixes LM-35.
+
+2006-05-26  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (connection_free),
+	(connection_handle_message), (_lm_connection_failed_with_error),
+	(connection_auth_reply), (connection_stream_received),
+	(lm_connection_set_disconnect_function):
+	- Patch from Owen Taylor fixes two reentrancy problems.
+	- Fixes LM-37.
+
+2006-04-19  Mikael Hallendal  <micke@imendio.com>
+
+	* Release 1.1.1
+
+	* Makefile.am: Added DISTCHECK_CONFIGURE_FLAGS
+	* configure.ac: Removed old gtk-doc cruft, only use GTK_DOC_CHECK now.
+	* loudmouth/Makefile.am: Added EXTRA_DIST.
+
+2006-04-19  Mikael Hallendal  <micke@imendio.com>
+
+	* configure.ac:
+	- Move back to use the GTK_DOC_CHECK() macro.
+	* docs/reference/Makefile.am:
+	- Updated to newer format from gtk-doc (old one failed distcheck with
+	  new auto*).
+
+2006-04-19  Mikael Hallendal  <micke@imendio.com>
+
+	* Landing a patch by Martyn Russell for Win32.
+
+	* configure.ac: Updated for Win32 work
+	* examples/*: Updated and improved.
+	* loudmouth/Makefile.am:
+	* loudmouth/lm-connection.c:
+	- Abstracted out the low level socket handling to lm-sock.[ch] to make
+	  this file clean from OS dependant socket code.
+	* loudmouth/lm-internals.h:
+	* loudmouth/lm-parser.c:
+	* loudmouth/lm-proxy.c:
+	* loudmouth/lm-sha.c: 
+	* loudmouth/lm-utils.c:
+	- Win32 work
+	* loudmouth/lm-sock.[ch]: 
+	- Network abstraction layer.
+
+2006-04-18  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-ssl-openssl.c: (_lm_ssl_begin):
+	- Fixed an issue reported by Martyn when using non-blocking sockets.
+
+2006-04-12  Mikael Hallendal  <micke@imendio.com>
+
+	* autogen.sh:
+	* configure.ac:
+	* configure.in:
+	- Bumped the autoconf and automake requirements.
+	- Added support to compile with --with-ssl=gnutls|openssl|no. The
+	  default is to build against gnutls and you must explicitely tell that
+	  you don't want SSL support or configure will fail if you don't have
+	  GnuTLS (or building with --with-ssl=openssl).
+	* loudmouth/Makefile.am:
+	* loudmouth/lm-ssl-openssl.c:
+	- Added an OpenSSL backend. Currently doesn't verify certificates.
+
+2006-04-05  Mikael Hallendal  <micke@imendio.com>
+
+	* configure.in: Define HAVE_SSL which will be set if GnuTLS or OpenSSL
+	  is supported.
+	* loudmouth/Makefile.am:
+	* loudmouth/lm-connection.c:
+	* loudmouth/lm-internals.h:
+	* loudmouth/lm-ssl-base.[ch]:
+	* loudmouth/lm-ssl-generic.c:
+	* loudmouth/lm-ssl-gnutls.c:
+	* loudmouth/lm-ssl-internals.h: Took out the SSL functions from
+	  lm-internals.h
+	* loudmouth/lm-ssl.[ch]:
+	- Refactored the SSL stuff to make room for an OpenSSL implementation.
+	- lm-ssl-generic and lm-ssl-base contains the shared parts between the
+	  GnuTLS and the OpenSSL implementations. lm-ssl-gnutls.c will contain
+	  GnuTLS specifics and lm-ssl-openssl.c will contain OpenSSL.
+
+2006-04-05  Mikael Hallendal  <micke@imendio.com>
+
+	* Speed release of 1.0.3
+	* NEWS: Updated
+	* configure.in: Bumped to 1.0.3
+	* loudmouth/lm-ssl.c: (ssl_free), (ssl_func_always_continue):
+	- Build fix for building without SSL, thanks foser, LM-25.
+
+2006-04-05  Mikael Hallendal  <micke@imendio.com>
+
+	* Release 1.0.2
+	* NEWS: Updated for 1.0.2
+	* configure.in: Bumped version to 1.0.2
+
+2006-04-03  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (connection_free),
+	(_lm_connection_succeeded), (connection_buffered_write_cb),
+	(connection_output_is_buffered), (connection_setup_output_buffer),
+	(connection_do_close), (connection_do_write), (connection_send),
+	(lm_connection_new), (lm_connection_authenticate):
+	- Added an output buffer that will be enabled if the nonblocking write
+	  cannot be performed in one go (for large messages).
+	- Fixes LM-17.
+	* loudmouth/lm-internals.h:
+	* loudmouth/lm-ssl.c: (ssl_func_always_continue), (_lm_ssl_send),
+	(lm_ssl_new):
+	- Added a default SSL function that will always continue, this will 
+	  be used if NULL is passed in as SSL function to lm_ssl_new.
+
+2006-03-20  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: 
+	(connection_do_open): Fixed up some of the error codes replied.
+	(lm_connection_open_and_block):
+	- Set the error if connection fails. 
+	- Fixes LM-15.
+
+2006-03-20  Mikael Hallendal  <micke@imendio.com>
+
+	* Makefile.am:
+	* acinclude.m4:
+	* configure.in:
+	* tests/.cvsignore:
+	* tests/Makefile.am:
+	* tests/test-objects.[ch]:
+	- Started to add support for the Check unit test framework.
+
+2006-03-20  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: Fixes LM-16.
+	(_lm_connection_failed_with_error): 
+	- Call connection_do_close to remove sources.
+	(connection_do_close): Always set the connection state to CLOSED.
+
+2006-01-02  Mikael Hallendal  <micke@imendio.com>
+
+	* MAINTAINERS: Added
+
+2005-08-16  Mikael Hallendal  <micke@imendio.com>
+
+	* NEWS:
+	* configure.in:
+	- Release 1.0.1
+
+	* loudmouth/lm-connection.c: (connection_free):
+	- Unref context if it is set.
+
+2005-08-14  Mikael Hallendal  <micke@imendio.com>
+
+	* NEWS:
+	* configure.in:
+	- Version 1.0, yiiiha!
+
+2005-08-12  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (_lm_connection_failed_with_error):
+	- Set state to LM_CONNECTION_STATE_CLOSED if we failed to connect.
+	- Fixes LM-8.
+
+2005-08-12  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c:
+	(lm_connection_authenticate_and_block):
+	- Set state correctly.
+	- Fixes LM-7.
+	(lm_connection_send_with_reply_and_block):
+	- Check that connection is open before using it.
+	- Fixes LM-6.
+
+2005-07-30  Mikael Hallendal  <micke@imendio.com>
+
+	* autogen.sh:
+	* configure.in:
+	* loudmouth/lm-connection.c: (connection_add_watch):
+	- Gtk-doc fixes.
+
+2005-07-09  Martyn Russell  <mr@gnome.org>
+
+	* loudmouth/lm-connection.c (lm_connection_set_ssl): 
+	- Error when trying to set up SSL knowing it is not supported.
+
+2005-05-17  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-ssl.c: 
+	* loudmouth/lm-connection.c:
+	* loudmouth/lm-proxy.c:
+	- Fixed some gcc 4.0 warnings.
+	* loudmouth/lm-ssl.[ch]: Made the API more consistent.
+	* examples/test-lm.c: Fixed some gcc 4.0 warnings.
+	
+2005-05-13  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-ssl.c: (_lm_ssl_read):
+	- Try to fix LM-3 for real this time.
+
+2005-05-08  Mikael Hallendal  <micke@imendio.com>
+
+	* Release 0.90
+
+	* NEWS:
+	* configure.in:
+	- Updated for 0.90
+
+2005-05-05  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: 
+	(_lm_connection_succeeded):
+	- Don't unref io_channel here as well, already done in do_close.
+	- Fixes LM-5, reported by Daniel Lavalliere.
+	(connection_do_close):
+	- Set fd to -1 to be sure it's not used again.
+
+2005-05-05  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-ssl.c: (_lm_ssl_read):
+	- Don't accidently return a negative bytes_read.
+	- Fixes LM-3, reported by Daniel Lavalliere.
+
+2005-05-05  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (connection_free):
+	- Unref LmSSL when freeing connection. Reported by Daniel Lavalliere.
+	- Fixes LM-4.
+
+2005-04-24  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (connection_free):
+	- Free the incoming message queue, reported by Daniel Lavalliere.
+
+2005-04-24  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (_lm_connection_succeeded),
+	(_lm_connection_failed_with_error), (connection_connect_cb),
+	(connection_do_connect), (connection_do_close):
+	- Disconnect from the connect io-watch when connect is done.
+	- Based on a patch from Daniel Lavalliere.
+
+2005-04-18  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (connection_free):
+	- Check if connection is opening as well and close it if it is.
+	- Fix suggested by Daniel Lavalliere.
+
+2005-03-31  Mikael Hallendal  <micke@imendio.com>
+
+	* Makefile.am:
+	* CONTRIBUTORS: 
+	* loudmouth/lm-connection.c:
+	* loudmouth/lm-ssl.c:
+	- More release work. 
+	- Adding CONTRIBUTORS file.
+
+2005-03-31  Mikael Hallendal  <micke@imendio.com>
+
+	* Makefile.am:
+	* configure.in:
+	- Removed the mono directory from the release tarball, never finished
+	  and should probably be redone from scratch if to be done now.
+
+2005-03-31  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-debug.h: Correct log domain
+	* loudmouth/lm-ssl.c: (ssl_verify_certificate):
+	- Removed GNUTLS_CERT_NOT_TRUSTED which has been removed from GnuTLS.
+	- Patch from foser@gentoo.org
+
+2005-02-02  Mikael Hallendal  <micke@imendio.com>
+
+	* examples/lm-change-password.c: (print_usage), (main):
+	- Support sending --host which would be the host part of the jid if
+	  the connect server is different.
+
+2005-01-27  Martyn Russell  <mr@gnome.org>
+
+	* loudmouth/lm-connection.c (_lm_connection_failed_with_error): 
+	- Added fix to call the open callback when all connection attempts
+	fail to the destination server.
+
+2005-01-19  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (connection_in_event):
+	* loudmouth/lm-ssl.c: (_lm_ssl_read):
+	- Seems GnuTLS returns a huge size as read bytes when the server is
+	  disconnected. Check if returned read size is larger than asked for
+	  if so, set the connection to be hung up.
+	- Fixes bug #164592
+
+2004-11-08  Mikael Hallendal  <micke@imendio.com>
+
+	* examples/lm-change-password.c: Added SSL support
+	* examples/lm-register.c: Added SSL support
+
+2004-10-31  Mikael Hallendal  <micke@imendio.com>
+
+	* Release 0.17.2
+
+	* NEWS: Updated for 0.17.2
+	* configure.in: Bumped version to 0.17.2
+
+2004-10-30  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-parser.c: (lm_parser_parse):
+        - Removed that hack to try to convert to utf8, the stream should be 
+          utf8 according to the Jabber specs. This hack caused a lot of weird
+          problems.
+        - Solves bug #154228
+
+2004-10-22  Mikael Hallendal  <micke@imendio.com>
+
+	reviewed by: <delete if not using a buddy>
+
+	* loudmouth/lm-connection.h:
+	* loudmouth/lm-error.h:
+	* loudmouth/lm-message-handler.h:
+	* loudmouth/lm-message-node.h:
+	* loudmouth/lm-message.h:
+	* loudmouth/lm-proxy.h:
+	* loudmouth/lm-utils.h:
+        * loudmouth/lm-ssl.h:
+        - G_BEGIN_DECLS and G_END_DECLS
+        * loudmouth/loudmouth.h:
+        - Include lm-ssl.h
+
+2004-10-08  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (connection_new_message_cb):
+	- Fix crash on Solaris when running in verbose mode.
+
+2004-10-05  Mikael Hallendal  <micke@imendio.com>
+
+	* examples/*.c
+	* loudmouth/*.[ch]
+	- s/Imendio HB/Imendio AB/
+
+2004-10-05  Mikael Hallendal  <micke@imendio.com>
+
+	* docs/reference/loudmouth-sections.txt:
+	- Added missing function
+
+2004-09-24  Tim Robbins  <tim@teragen.com.au>
+
+	* loudmouth/lm-connection.c: (connection_do_close):
+        - Use g_source_destroy instead of g_source_remove since we might not
+          use the default main context.
+
+2004-09-20  Tollef Fog Heen  <tfheen@raw.no>
+
+	* loudmouth/lm-connection.c:
+	  (connection_in_event): Use gsize and not gint, they have
+          different sizes on 64 bit architectures.
+
+	* loudmouth/lm-ssl.c, loudmouth/lm-internals.h:
+          Adjust prototype of _lm_ssl_read to match.
+
+2004-09-03  Mikael Hallendal  <micke@imendio.com>
+
+	* examples/Makefile.am:
+	* examples/lm-register.c:
+	- Added small tool to register an account
+
+2004-09-02  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (lm_connection_set_proxy):
+	- Use NULL to unset the proxy settings
+	* docs/reference/tmp/lm-proxy.sgml: Updated LmProxyType docs
+
+2004-08-30  Mikael Hallendal  <micke@imendio.com>
+
+	* Released 0.17.1
+	
+	* NEWS: Updated for 0.17.1
+	* configure.in: Bumped version to 0.17.1
+	* loudmouth/lm-connection.c: 
+	(connection_start_keep_alive):
+	- Don't add idle if keep alive rate is 0.
+	- Patch from Marcin Krzyżanowski <krzak@hakore.com>
+	(lm_connection_new): initialize keep alive rate
+
+2004-08-27  Mikael Hallendal  <micke@imendio.com>
+
+	* Released 0.17
+	
+	* NEWS: Updated for 0.17
+	* configure.in: Don't try to output mono Makefiles
+	* docs/reference/tmpl/lm-connection.sgml: Updated
+	* loudmouth/lm-connection.[ch]:
+	- Changed the LmConnectionState enum to follow the rest of the API 
+	  better.
+
+2004-08-25  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.[ch]: 
+	(connection_send_keep_alive),
+	(connection_start_keep_alive), 
+	(connection_stop_keep_alive): Added
+	(lm_connection_set_keep_alive_rate): 
+	- Added support to have Loudmouth send keep alive packages, a single 
+	  space, at regular intervals.
+
+2004-08-09  Mikael Hallendal  <micke@imendio.com>
+
+	* examples/test-tunnel.c: Updated.
+	* loudmouth/lm-connection.[ch]:
+	(lm_connection_get_jid), (lm_connection_set_jid): 
+	- Replaced the _host functions with these. These makes much more sense.
+
+2004-08-08  Mikael Hallendal  <micke@imendio.com>
+
+	* configure.in: Bumped version to 0.17
+
+2004-08-08  Mikael Hallendal  <micke@imendio.com>
+
+	* docs/reference/tmpl/lm-proxy.sgml: Updated docs
+	* examples/test-tunnel.c: Use the new API for connecting to other host
+	  than the actual server name (host part of jid).
+	* loudmouth/lm-connection.[ch]:
+	(lm_connection_set_host), (lm_connection_get_host): Added
+	- Use lm_connection_get_host internally when connecting.
+	- Make LM_PROXY_TYPE_NONE reset the proxy settings on a connection.
+	* loudmouth/lm-proxy.c: (_lm_proxy_connect_cb): Don't connect when 
+	  proxy is of type LM_PROXY_TYPE_NONE.
+
+2004-08-08  Mikael Hallendal  <micke@imendio.com>
+
+	* docs/reference/tmpl/lm-proxy.sgml: Added LM_PROXY_TYPE_NONE
+	* examples/Makefile.am: Added test-tunnel.c
+	* examples/test-tunnel.c: 
+	- Added test that uses LM_PROXY_TYPE_NONE.
+	* loudmouth/lm-internals.h: Cleaning
+	* loudmouth/lm-proxy.c: 
+	- Support using LM_PROXY_TYPE_NONE for direct 
+	  (for example an ssh-tunnel) "proxy".
+
+2004-08-03  Mikael Hallendal  <micke@imendio.com>
+
+	* Synced from SVN. Going to continue working on it here.
+
+2004-06-15  Mikael Hallendal  <micke@imendio.com>
+
+	* README: Updated GnuTLS dependency.
+	* mono/*: Some work on the mono bindings.
+
+2004-05-28  Mikael Hallendal  <micke@imendio.com>
+
+	* configure.in: 
+	- Correctly inform whether SSL support was enabled or not.
+
+2004-05-28  Mikael Hallendal  <micke@imendio.com>
+
+	* src/lm-sha.c: Fixed lvalue cast that wasn't approved by newer GCC.
+
+2004-05-10  Mikael Hallendal  <micke@imendio.com>
+
+	* configure.in: Enable Mono on request
+	
+	* mono/*: 
+	- Updated the bindings some.
+	- Removed the autogenerated, it's such a small API that I figured
+	  it was easier to wrap it manually.
+
+2004-04-30  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-parser.c (parser_end_node_cb): Unref the message node.
+
+2004-04-29  Mikael Hallendal  <micke@imendio.com>
+
+	* examples/lm-change-password.c:
+	* examples/Makefile.am:
+	- Added a small tool to change the password on a jabber account.
+
+2004-04-27  Mikael Hallendal  <micke@imendio.com>
+
+	* Ignore on autogenerated files.
+
+2004-04-20  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/*.[ch]: Updated copyright information
+
+2004-04-20  Mikael Hallendal  <micke@imendio.com>
+
+	* configure.in: Now depend on Glib 2.4
+	* loudmouth/lm-queue.[ch]: Removed, use the new GQueue in Glib 2.4
+	* loudmouth/lm-connection.[ch]: Use GQueue instead of LmQueue.
+
+2004-04-16  Mikael Hallendal  <micke@imendio.com>
+
+	* configure.in: Added libtasn1 requirement
+	* loudmouth.spec.in: Added requirement on libtasn if built with SSL.
+
+2004-04-04  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-sha.c: Commited compile fix from Sjoerd.
+
+2004-03-20  Mikael Hallendal  <micke@imendio.com>
+
+	* docs/reference/loudmouth-sections.txt:
+	- Added lm_connection_get_state
+	- Added LmConnectionState
+
+2004-03-17  Mikael Hallendal  <micke@imendio.com>
+
+	* Synced from SVN.
+
+	* Released 0.16
+	
+	* configure.in: Bumped to 0.16 
+	* NEWS: Updated for 0.16
+ 
+2004-03-17  Mikael Hallendal  <micke@imendio.com>
+
+	* docs/reference/*: Updated documentation.
+	* loudmouth/*: Fixed the documentation in a couple of places. 
+
+2004-03-17  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.[ch]
+	(lm_connection_new_with_context): 
+ 	- Added to be able to give what context the connection should be 
+	  running in. 
+	- All internal functions are updated to use the context or NULL if 
+	  lm_connection_new was called.
+	- Should make it possible to use several LmConnections in various 
+	  threads.
+
+2004-03-17  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: 
+	* loudmouth/lm-internal.h:
+	* loudmouth/lm-proxy.c: 
+	- Make the HTTP proxy support asynchronous. Patch from Josh Beam.
+	- Re-enable the HTTP proxy support.
+	* examples/lm-send-sync.c: 
+	* examples/lm-send-async.c:
+	* examples/test-http-proxy.c:
+	- Added two of the old examples and a new one to test out the HTTP 
+	  proxy support.
+
+2004-03-17  Mikael Hallendal  <micke@imendio.com>
+
+	* configure.in: Generate examples/Makefile
+	* loudmouth/test-jid.c: Removed
+	* loudmouth/test-lm.c: Moved to examples/
+	* exmples/*: Moved out from loudmouth/
+
+2004-02-05  Mikael Hallendal  <micke@imendio.com>
+
+	* README: Updated information about website and bug reporting
+
+2004-01-29  Richard Hult  <richard@imendio.com>
+
+	* loudmouth/lm-message-node.c: (lm_message_node_to_string):
+	* loudmouth/lm-message.c: (lm_message_new):
+	(lm_message_new_with_sub_type), (lm_message_unref): 
+	- Plug leaks and fix two small coding style issues.
+
+2004-01-23  Mikael Hallendal  <micke@imendio.com>
+	
+	* Release 0.15.1
+
+	* NEWS: 
+	* configure.in:
+	- Updated to 0.15.1
+
+2004-01-22  Frederic Crozat  <fcrozat@mandrakesoft.com>
+
+	* configure.in:
+	* loudmouth/lm-ssl.c: (ssl_verify_certificate):
+	Don't use deprecated function of gnutls.
+	Now requires gnutls >= 1.0.0
+
+2004-01-21  Mikael Hallendal  <micke@imendio.com>
+
+	* Release 0.15.
+
+2004-01-21  Mikael Hallendal  <micke@imendio.com>
+
+	* Makefile.am:
+	* configure.in:
+	- Removed the mono bindings for now.
+
+2004-01-21  Richard Hult  <richard@imendio.com>
+
+	* loudmouth.spec.in: 
+	- The library changed name, update to libloudmouth-1.la.
+	
+2004-01-21  Mikael Hallendal  <micke@imendio.com>
+
+	* docs/reference/tmpl/lm-ssl.sgml:
+	* loudmouth/lm-ssl.c:
+	- Added API documentation
+
+2004-01-21  Mikael Hallendal  <micke@imendio.com>
+
+	* docs/reference/loudmouth-docs.sgml:
+	* docs/reference/loudmouth-sections.txt:
+	* docs/reference/tmpl/lm-connection.sgml:
+	* docs/reference/tmpl/loudmouth-unused.sgml:
+	* docs/reference/tmpl/lm-ssl.sgml:
+	* loudmouth/lm-ssl.h:
+	- Added new file to documentation
+
+2004-01-21  Mikael Hallendal  <micke@imendio.com>
+
+	* Makefile.am:
+	* configure.in: Work on the C# bindings
+	* NEWS: Preparing for 0.15
+	* loudmouth-1.0.pc.in: Versioned the library
+	* loudmouth/Makefile.am: ditto
+	* loudmouth/lm-connection.c: 
+	* loudmouth/lm-connection.h: Disabled the proxy support.
+	* mono/Makefile:
+	* mono/Makefile.am:
+	* mono/loudmouth/Makefile.am:
+	* mono/loudmouth/loudmouth-api.xml:
+	* mono/loudmouth/loudmouth.metadata:
+	* mono/sources/loudmouth-sources.xml:
+	- WIP on the bindings, first cut of generated bindings.
+
+2004-01-16  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c:
+	(connection_failed_with_error),
+	(connection_connect_cb): 
+	(connection_do_connect):
+	- Don't fall through after calling connection_failed.
+	- Fixed bug #130449
+
+2004-01-15  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/Makefile.am:
+	- Added lm-ssl.[ch]
+	* loudmouth/lm-connection.c:
+	* loudmouth/lm-connection.h:
+	- Splitted out the SSL parts
+	- No longer contains loads of #ifdefs around tls parts
+	- Added lm_connection_[set|get]_ssl instead.
+	* loudmouth/lm-internals.h:
+	- Added _lm_ssl*
+	* loudmouth/lm-ssl.c:
+	* loudmouth/lm-ssl.h:
+	- New files, the SSL parts from LmConnection.
+	- Declares no-ops for SSL functions if compiled without support for it.
+	* loudmouth/test-lm.c:
+	- Updated for new SSL API.
+
+2004-01-15  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c:
+	- Added Sjoerd Simons to copyright list.
+
+2004-01-15  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/Makefile.am:
+	- Added lm-proxy.[ch]
+	* loudmouth/lm-connection.c:
+	* loudmouth/lm-connection.h:
+	- Commited patch from Sjoerd Simons to make async connect work better.
+	- Cleaned out the proxy support to it's own file.
+	- Made sure all public functions user g_return_(val)_if_fail.
+	* loudmouth/lm-internals.h:
+	- cleaned up a bit and added proxy function and base64 encoding
+	* loudmouth/lm-message-handler.c:
+	- include config.h
+	* loudmouth/lm-proxy.c:
+	* loudmouth/lm-proxy.h:
+	- Added, broken out of LmConnection
+	- Commited patch from Josh Beam
+	* loudmouth/lm-utils.c:
+	(_lm_utils_base64_encode): Added.
+
+2004-01-08  Richard Hult  <richard@imendio.com>
+
+	* loudmouth/lm-connection.c (connection_timeout_check_open):
+	Remove debug output.
+
+	* acinclude.m4: Add gmtoff check.
+
+	* loudmouth/lm-utils.c (lm_utils_get_localtime): Use tm_gmtoff if
+	available.
+
+2004-01-06  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c:
+	- Now works with sync open again.
+	* loudmouth/lm-utils.c: (_lm_utils_free_callback):
+	- Work with NULL
+
+2004-01-05  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: 
+	- Work in progress of making the lm_connection_open really async.
+	- Currently broken for lm_connection_open_block.
+
+2003-12-27  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.[ch]: 
+	(connection_verify_certificate),
+	(connection_do_open), 
+	(connection_do_close), 
+	(connection_in_event),
+	(connection_send),
+	(lm_connection_new): Updated to not pass SSL function everywhere.
+	(lm_connection_open): Removed the _ssl function
+	(lm_connection_open_and_block): Removed the _ssl function
+	(lm_connection_set_use_ssl): Added, set LmSSLFunction here instead.
+	(lm_connection_get_use_ssl): Internal update
+
+2003-12-27  Mikael Hallendal  <micke@imendio.com>
+
+	* docs/reference/tmpl/lm-error.sgml:
+	* loudmouth/lm-connection.c:
+	* loudmouth/lm-connection.h:
+	(connection_connect_nonblocking),
+	(connection_do_open),
+	(connection_http_proxy_negotiate),
+	(lm_connection_new),
+	(lm_connection_get_proxy_type),
+	(lm_connection_set_proxy_type),
+	(lm_connection_get_proxy_server),
+	(lm_connection_set_proxy_server),
+	(lm_connection_get_proxy_port),
+	(lm_connection_set_proxy_port):
+	- Add support for HTTP proxy
+	- Patch from Josh Beam <josh@3ddrome.com>
+	- Needed changes to Loudmouth to fix bug #117757 in Gossip.
+
+2003-12-19  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: 
+	(connection_free): cleaned up a bit.
+	(connection_connect_nonblocking): added, nonblocking connect
+	(connection_do_open):
+	- Use the nonblocking connect
+	- set state
+	(connection_do_close): cleaned up 
+	(connection_auth_reply): set state
+	(lm_connection_cancel_open): added
+	(lm_connection_authenticate): set state
+	(lm_connection_is_open): use state
+	(lm_connection_is_authenticated): use state
+	(lm_connection_get_state): added
+	- Part fixes bug #122326
+
+2003-12-15  Mikael Hallendal  <micke@imendio.com>
+
+	* README: Updated information about bug reporting
+
+2003-12-15  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c:
+	- Fixed issue with the SSL parts. Patch from Colin Walters
+
+2003-11-20  Ross Burton  <ross@burtonini.com>
+
+	* loudmouth/lm-message-node.h:
+	- Mark the private members how gtk-doc wants it.
+
+	* loudmouth/lm-message-node.c:
+	- Fix comment typos and document more parameters.
+
+	* loudmouth/lm-connection.c: Fix comment typos.
+
+	* docs/reference/loudmouth-sections.txt: 
+	- Removed a non-existent function.
+
+	* docs/reference/tmpl/lm-connection.sgml: Fix some typos.
+
+	* docs/reference/tmpl/lm-message-node.sgml:
+	- Document raw_node, and remove private fields.
+
+	* docs/reference/tmpl/lm-message.sgml: gtk-doc did this itself...
+
+2003-11-16  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: 
+	(lm_connection_new): Don't create and attach source here
+	(lm_connection_open): Do it here, 
+	(lm_connection_open_and_block): and here. Fixes #126983.
+
+2003-11-11  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c:
+	(connection_do_close): Remove the incoming source. Reported and fix
+	  proposed by Christopher G. Abiad
+	(lm_connection_authenticate_and_block):
+	- Set error message on auth failed (should be more explicit). Fixes
+	  problem when you try to read the error message on fail.
+
+2003-11-11  Mikael Hallendal  <micke@imendio.com>
+
+	* Makefile.am: 
+	- Added README.WIN32 so it will be distributed next release.
+
+2003-10-13  Mikael Hallendal  <micke@imendio.com>
+
+	* configure.in: Bumped version to 0.14.1.99
+
+	* loudmouth/lm-message.c: 
+	(lm_message_new): Always set an ID on the message.
+
+2003-10-13  Mikael Hallendal  <micke@imendio.com>
+ 
+	* mono/*: Added first cut at C-sharp bindings that I hacked up a while
+	  ago. Can't continue development at the moment since the mono compiler
+	  segfaults on my machine at the moment.
+
+	* python/*: Johan Dahlin added a first cut of python bindings, yay him!
+
+2003-10-13  Mikael Hallendal  <micke@imendio.com>
+
+	* NEWS: Updated for 0.14.1
+	
+	* configure.in: Bumped to 0.14.1
+	
+	* loudmouth/lm-connection.c: (connection_in_event): check if bytes_read
+	  equals GNUTLS_E_AGAIN, fixes crash. Patch by Marinus Schraal.
+
+2003-10-03  Mikael Hallendal  <micke@imendio.com>
+
+        * Release 0.14
+	
+	* NEWS: Updated for 0.14
+	
+	* configure.in: Bumped to 0.14
+	
+2003-10-02  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (connection_free):
+	- Free the message handlers and message handler list when free'ing 
+	  the connection.
+
+2003-10-01  Mikael Hallendal  <micke@imendio.com>
+
+	* configure.in: Tweaked the --with-ssl option a bit.
+	
+	* loudmouth.spec.in: 
+	- Added a with_ssl to be able to easily turn of GNU Tls support.
+	- Fixes LM-14
+
+2003-10-01  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (connection_do_open):
+	- Added a patch for IPv6-support submitted by Sjoerd Simons.
+	- Sjoerd also seems to know this stuff better than me since his 
+	  connection code looked more sane than mine. Thanks alot!
+
+2003-10-01  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/Makefile.am: 
+	- added lm-queue.[ch]
+	  
+	* loudmouth/lm-queue.[ch]: copied and extended from GQueue.
+	
+	* loudmouth/lm-connection.c: 
+	- Use LmQueue instead of GQueue
+	(lm_connection_open_and_block): Better handling of the queue.
+	
+	(lm_connection_send_with_reply_and_block): 
+	- Fixed a bug causing replies to be over looked.
+
+2003-10-01  Mikael Hallendal  <micke@imendio.com>
+
+        * README.WIN32, win32-config.h: 
+	- Added information about how to build on Windows. Fixes LM-12
+	  
+2003-08-24  Martyn Russell  <ginxd@btopenworld.com>
+
+	* loudmouth/lm-connection.c:
+	(connection_in_event): Use an int for bytes_read. Since bytes_read is
+	  now also used for gnutls return value (which can be < 0) a gsize
+	  (unsigned) is not a good idea...
+	
+2003-08-15  Mikael Hallendal  <micke@imendio.com>
+
+        * Release 0.13.2
+
+        * configure.in: Bumped to 0.13.2
+        * NEWS: Updated for 0.13.2
+
+	* loudmouth/lm-parser.c: (parser_end_node_cb):
+        - Don't crash on </stream:stream>. Fixes bug #117952
+
+2003-08-05  Mikael Hallendal  <micke@imendio.com>
+
+        * Release 0.13.1
+
+        * NEWS: Updated for 0.13.1
+	* configure.in: Bumped to 0.13.1
+
+2003-08-05  Mikael Hallendal  <micke@imendio.com>
+
+	* acinclude.m4: Added GnuTLS-macro from GnuTLS-distribution.
+ 
+	* configure.in: Added comment if SSL support disabled.
+
+	* loudmouth.spec.in: Added Build-requirment on gtk-doc.
+
+        * Release 0.13
+	
+	* NEWS: Updated for 0.13  
+	* configure.in: Bumped to 0.13
+
+2003-08-04  Mikael Hallendal  <micke@imendio.com>
+
+	* README: 
+	- Added comment about GnuTLS and --with-included-libtasn1.
+	- Fixes LM-7 and bug #117801
+
+2003-08-04  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: (connection_in_event): 
+	- Disconnect and report that we are disconnected if read doesn't work.
+	  This solved the problem when Gossip eats 100% CPU because the server
+	  got disconnected. Fixes LM-9.
+
+	* loudmouth/Makefile.am: Use -DRUNTIME_ENDIAN, fixes LM-8, bug #118502.
+
+	* loudmouth/lm-connection.c: 
+	- Modifed patch from Mikhail Zabaluev, fixes LM-5.
+	* (connection_free): close connection if it's still open.
+	* (connection_do_open): Store away the GSource handlers.
+	* (connection_do_close): Remove the GSources from the IOChannel.
+	* (connection_in_event, connection_error_event, connection_hup_event):
+	- Return FALSE if io_channel = NULL.
+
+	* configure.in:
+	- Submitted patch for Loudmouth from Mikhail Zabaluev to
+	  make configure.in use the aclocal-stuff from gnutls instead of
+	  selfmade hack. Fixes LM-6. 
+
+2003-07-29  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-message.[ch]:
+	- Added LM_MESSAGE_SUB_TYPE_NORMAL to be a sub type that can actually 
+	  be set.
+	- If type is not set in a <message/>-node it won't be reported to be 
+	  LM_MESSAGE_SUB_TYPE_NORMAL but rather LM_MESSAGE_SUB_TYPE_NOT_SET.
+
+2003-07-17  Mikael Hallendal  <micke@imendio.com>
+
+        * Release 0.12
+
+	* NEWS: Updated for 0.12
+	* configure.in: Bumped to 0.12
+
+2003-07-17  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c:
+	(auth_req_data_free): Added, free's auth data
+	(connection_create_auth_req_msg): 
+	- Added, generates an auth request message
+	(connection_create_auth_msg):
+	- Added, generates an auth message
+	(connection_auth_req_reply): Added
+	(connection_check_auth_type): Added
+	(lm_connection_authenticate): Modified
+	(lm_connection_authenticate_and_block): Modified
+        - Fixes cf-bug #509
+
+2003-07-17  Mikael Hallendal  <micke@imendio.com>
+
+	* configure.in: Added GNUTLS_REQUIRED
+	* loudmouth.spec.in: Added gnutls dependency in RPM's.
+
+2003-07-17  Mikael Hallendal  <micke@imendio.com>
+
+	* docs/reference/loudmouth-sections.txt: Added new functions
+	* docs/reference/tmpl/lm-error.sgml: Documented undocumented references.
+	* docs/reference/tmpl/lm-message-handler.sgml: Same.
+	* docs/reference/tmpl/loudmouth-unused.sgml: Same
+	* loudmouth/lm-debug.c: Same
+	
+	* loudmouth/lm-message-handler.c:
+	* loudmouth/lm-message-handler.h:
+	(_lm_message_handler_handle_message): 
+	- Check if handler is valid before trying to handle message.
+	(lm_message_handler_new): Set handler to be valid.
+	(lm_message_handler_invalidate): Added. Fixes cf-bug #677
+	(lm_message_handler_is_valid): Added
+
+2003-07-14  Mikael Hallendal  <micke@imendio.com>
+
+        * Release 0.11
+
+        * configure.in: Bumped to 0.11
+	* NEWS: Updated for 0.11
+	
+2003-07-12  Mikael Hallendal  <micke@imendio.com>
+
+	* configure.in: 
+	- Added SSL support, patch from Bartosz Zapalowski. THIS GUY ROCKS!
+	* docs/reference/loudmouth-sections.txt: 
+	- added lm_connection_supports_ssl.
+	* loudmouth/lm-connection.c: Added support for SSL.
+	* loudmouth/test-lm.c: (main): Use SSL if it's compiled in.
+
+2003-07-07  Mikael Hallendal  <micke@imendio.com>
+
+        * Release 0.10.1
+
+	* NEWS: Updated for 0.10.1
+	* configure.in: Bumped version to 0.10.1
+
+2003-07-07  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c: moved the includes around a bit so that 
+	  it builds on FreeBSD without problems.
+
+2003-06-26  Mikael Hallendal  <micke@imendio.com>
+
+        * Released 0.10
+        * configure.in: Changed version to 0.10
+	* NEWS: Added 0.10 news.
+	
+2003-06-25  Mikael Hallendal  <micke@imendio.com>
+
+	* configure.in: Bumped to 0.9.1
+	* loudmouth.spec.in: Changed the URL to the project site.
+
+2003-06-24  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-connection.c:
+	* loudmouth/lm-sha.c: 
+	* loudmouth/test-lm.c:
+	- Submitted patch that makes Loudmouth work and build on Win32.
+	  Patch sent by Vince Negri, thanks a lot.
+
+2003-06-15  Mikael Hallendal  <micke@imendio.com>
+
+	* loudmouth/lm-message.c:
+	* loudmouth/lm-message.h:
+	(lm_message_get_sub_type): Return LmMessageSubType.
+	  Found by Alexander Saltanov
+
+2003-06-13  Mikael Hallendal  <micke@imendio.com>
+
+	* AUTHORS: updated contact information
+	* README: updated contact information
+	* loudmouth/*.[ch]: updated email address
+	* loudmouth/lm-message-node.c: don't lower case the XML
+	* loudmouth/lm-message.c:
+	(message_type_from_string): use strcmp rather than strcasecmp
+	* loudmouth/lm-parser.c: 
+	(parser_start_node_cb),
+	(parser_end_node_cb), 
+	(lm_parser_new): use strcmp instead of strcasecmp
+
+2003-06-11  Mikael Hallendal  <micke@codefactory.se>
+
+	* docs/reference/loudmouth-sections.txt: Added new functions
+
+	* loudmouth/lm-message-node.c: 
+	(_lm_message_node_new): Set node->raw_mode = FALSE.
+	(lm_message_node_get_raw_mode): Added
+	(lm_message_node_set_raw_mode): Added
+	(lm_message_node_to_string): Don't escape if raw_mode == TRUE
+	
+	* loudmouth/lm-message-node.h: Added new functions.
+
+2003-04-26  Mikael Hallendal  <micke@codefactory.se>
+
+        * loudmouth.spec.in: Enable gtk-doc
+ 
+        * Released 0.9.1
+
+2003-04-17  Mikael Hallendal  <micke@codefactory.se>
+
+	* docs/reference/Makefile.am: Make --disable-gtk-doc not try to 
+	  install the documents :) Fixes #633, patch by Kevin Dougherty.
+	
+	* loudmouth/lm-debug.c: Make build work with --disable-debug, 
+	  fixes #634, patch by Kevin Dougherty.
+
+2003-04-11  Mikael Hallendal  <micke@codefactory.se>
+
+	* NEWS: More updates
+	
+	* configure.in: Bumped version to 0.9
+	
+	* loudmouth.spec.in: Fixed
+	
+	* loudmouth/lm-connection.c:
+	(lm_connection_send_with_reply_and_block): Removed debug output.
+	
+2003-04-10  Mikael Hallendal  <micke@codefactory.se>
+
+        * NEWS: Updated for upcoming 0.9 release.
+	
+2003-04-07  Mikael Hallendal  <micke@codefactory.se>
+
+	* README: Added information about debug output.
+	
+	* loudmouth/lm-connection.c: 
+	(connection_in_event): Use a define for IN_BUFFER_SIZE
+
+2003-04-07  Mikael Hallendal  <micke@codefactory.se>
+
+	* README:
+	* loudmouth/lm-connection.c: (connection_in_event):
+
+2003-04-07  Mikael Hallendal  <micke@codefactory.se>
+
+	* configure.in:
+        - Added debug flag.
+	* loudmouth/Makefile.am:
+	- Added lm-debug.[ch]
+	* loudmouth/lm-internals.h: Added debug-stuff
+	* loudmouth/lm-connection.c: Use debug-stuff instead of d()-macro.
+	* loudmouth/lm-message.c: Same
+	* loudmouth/lm-parser.c: Same
+
+2003-04-05  Mikael Hallendal  <micke@codefactory.se>
+
+	* Makefile.am: Added .spec and .spec.in to EXTRA_DIST
+	* configure.in: Set GLIB2_REQUIRED, will be used in the spec-file.
+	* loudmouth/lm-message.c:
+	* loudmouth/lm-message.h:
+	- fixed the support for message and presence elements without type 
+	  attribute.
+
+2003-04-01  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-message.c:
+	(lm_message_get_node): added, using for bindings.
+
+	* loudmouth/lm-message-node.c:
+	(lm_message_node_get_value): added, makes binding easier.
+	(lm_message_node_set_attribute): splitted out to just set one
+	  attribute. using just this one to bind for C#.
+
+2003-03-24  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-connection.c:
+	(connection_incoming_dispatch):
+	- don't call handle_message if message is NULL.
+	(connection_do_open): 
+	- set error, don't send any messages, just open the socket and
+	  send the xml-document starter.
+	(connection_do_block): Removed.
+	(connection_create_source): added
+	(lm_connection_open_and_block): implemented.
+	(lm_connection_authenticate_and_block): implemented.
+	(lm_connection_send_with_reply_and_block): implemented.
+
+2003-03-23  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-connection.c:
+	- Now uses a queue for all incoming messages and a source that
+	  polls the queue.
+	(connection_do_close): added, unrefs
+	  io_channel and sets connection to be disconnected.
+	(connection_do_open): renamed from connection_connect
+
+2003-03-14  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-connection.c:
+	(lm_connection_get_server): added
+	(lm_connection_set_server): added
+	(lm_connection_get_port): added
+	(lm_connection_set_port): added
+	(lm_connection_get_use_ssl): added
+	(lm_connection_set_use_ssl): added
+	(lm_connection_new): Don't take port and use_ssl arguments. Make
+	  server-attribute optional (passing NULL).
+
+	* configure.in: bumped to 0.8.99
+	
+2003-03-13  Mikael Hallendal  <micke@codefactory.se>
+
+	* autogen.sh (need_configure_in):
+	- fix to autogen on solaris. Reported by stric.
+
+	* configure.in: 
+	- Added check for -lnsl and -lsocket needed to link on solaris.
+
+	* Released 0.8
+
+	* configure.in: bumped version to 0.8
+
+	* README (Introduction): added some information before the 0.8
+	  release.
+
+	* loudmouth/lm-connection.c:
+	(connection_error_event): call disconnect callback.
+	(connection_hup_event): same.
+	(lm_connection_set_disconnect_function): added.
+
+2003-03-05  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/*.h: prettified headers.
+	
+	* docs/reference/*: Updating docs. Now at 100%!
+
+2003-03-03  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-message-node.h:
+	- removed LmMessageNodeFunc, wasn't used anywhere.
+
+	* docs/reference/*: Updating docs. At 88% now... sooon!
+
+	* Changed license (again), this time back to LGPL. And it'll stay
+	  there :)
+	
+2003-02-27  Mikael Hallendal  <micke@codefactory.se>
+
+	* Worked alot on documenting.
+	
+2003-02-25  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-connection.c (connection_in_event): 
+	- Try to solve #553
+
+2003-02-24  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-sha.c: don't use stdint.h, instead use the g*
+	  versions of different int lengths. Fixes #536
+
+2003-02-08  Mikael Hallendal  <micke@codefactory.se>
+
+	* src/*.c: Started to document
+
+	* src/lm-result.h: Removed
+
+	* src/lm-error.[ch]: Added
+
+	* src/lm-connection.[ch]: 
+	- Use GErrors for reporting errors.
+	- Fixes #510
+
+	* docs/reference/Makefile.am: Don't link against GObject.
+
+2003-02-06  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-connection.c (connection_connect): send the opening
+	  xml tag stating that we'll use encoding utf-8.
+
+2003-02-02  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-message.c:
+	- fixes #504
+	(lm_message_new): take to-argument
+	(lm_message_new_with_sub_type): take to-argument
+
+	* loudmouth/test-lm.c (main): don't init GType, not used anymore..
+
+	* lm-message-handler.c:
+	- include files we actually need :)
+
+	* loudmouth/lm-connection.c: don't include removed files.
+
+	* loudmouth/Makefile.am:
+	- Removed all the stuff that generated the marshallers.
+
+	* configure.in: 
+	- removed gobject deps
+	- removed glib-genmarshal deps
+
+	* loudmouth-1.0.pc.in (Requires): removed all deps except glib.
+
+	* loudmouth/lm-connection.c: 
+	- Is no more a GObject, this means that loudmouth now only depends
+	  on GLib which makes it minimal and perfect for embedded systems.
+
+	* configure.in: Don't require libgtcpsocket
+
+	* loudmouth/lm-connection.c: Don't use libgtcpsocket for
+	  communication. Now uses a GIOChannel.
+
+	* loudmouth/*.c:
+	- Use GDestroyNotify instead of LmFreeFunction.
+	- Added LmCallback which is a struct with callback, 
+	  user_data and a notify function.
+	- Changed LmConnectionOpenFunction and LmAuthenticateFunction to
+	  be LmResultFunction.
+
+2003-02-01  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-sha.c (lm_sha_hash): don't print the digest.
+
+2003-01-31  Mikael Hallendal  <micke@codefactory.se>
+
+	* *: changed the license to the same one used in RoadRunner.
+
+	* loudmouth/lm-sha.c:
+	- switched the SHA implementation for one with BSD license.
+
+	* loudmouth/lm-connection.c (lm_connection_authenticate): 
+	- lm_sha_hash now returns a const gchar *
+
+
+2003-01-30  Mikael Hallendal  <micke@codefactory.se>
+
+	* docs/*: Added gtk-doc support. Now I just have to write API docs
+	  for everything :)
+
+	* loudmouth/lm-helper.[ch]: Removed.
+	
+2003-01-30  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-message-node.c:
+	(lm_message_node_to_string): made public since it's really useful
+	  for debugging your client.
+	(lm_message_node_find_child): readded this function from the old
+	  LmNode. It traverses the tree to see if it can find the child
+	  and returns at the first it finds. lm_message_node_get_child
+	  only looks at the direct children.
+
+2003-01-29  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-connection.c:
+	(lm_connection_send): don't set ID here. we set it in
+	  send_with_reply if it's not set (since it's needed there to find
+	  the correct handler).
+	(connection_connection_recv_cb): 
+	- not sure if this helps any, return if length <= 0 instead of
+	  feeding it to the parser.
+	
+	* loudmouth/lm-message.[ch]: 
+	- Added LmMessageSubType that can be used to set and check a
+	  message's sub type <node type="sub type">.
+	(message_sub_type_from_string): added
+	(message_sub_type_to_string): added
+	(lm_message_new_with_sub_type): added
+	(lm_message_get_sub_type): added
+
+	* loudmouth/lm-message-node.c (lm_message_node_get_child): 
+	- remove variable that caused warning.
+
+	* configure.in: updated version to 0.2
+
+2003-01-27  Mikael Hallendal <micke@codefactory.se>
+
+	* src/*: 
+	- LmClient -> LmConnection
+	- Use Message Handlers on LmConnection instead of signals
+	- LmElement, LmPresence and LmIQ removed
+	- LmMessage used for all kinds of messages now
+	- LmMessageHandler added as a generic message handler for all
+	  kinds of messages.
+	- send_with_reply added to give a callback when waiting for an
+	  answer to a request.
+	- LmResult added to most calls. Used to get some feedback on what
+	  might have gone wrong.
+		
+2003-01-27  Anders Carlsson  <andersca@codefactory.se>
+
+	* autogen.sh (FILE): Use lm-message.c for testing.
+
+2003-01-26  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/*: Added lm-helper which will create elements to send
+	  through client.
+	
+2003-01-25  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-marshal.list (VOID): cleaned up old marshallers.
+
+	* loudmouth/lm-element.c (lm_element_get_type_string): added.
+
+	* loudmouth/lm-client.c: 
+	- Changed message, presence and iq received back into signals
+	- Added default handlers to class
+	- Calling default handlers only if none of the connected callbacks
+	  returned TRUE.
+
+2003-01-21  Mikael Hallendal  <micke@codefactory.se>
+
+	* configure.in: don't use libgtcpsocket 1.0, use 0.1.0
+
+2002-12-10  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-util.c:
+	(lm_util_get_localtime): Added
+	(lm_util_case_strstr): Removed
+
+	* loudmouth/lm-x.h: Removed.
+
+	* loudmouth/lm-element.c:
+	- Added support for an iter for iterating over all x elements.
+	- Needed to resolve #347
+	(lm_element_get_x_iter): Added
+	(lm_x_iter_next): Added
+	(x_iter_next): Added
+	(lm_x_iter_free): Added
+
+	* loudmouth/Makefile.am (libloudmouthinclude_HEADERS): 
+	- install lm_util.h
+
+2002-12-03  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-presence.c:
+	- Fixed show-array indexing, Fixes #341 and #342
+	(lm_presence_set_show): don't set
+	  <show/> to "normal", just leave it out.
+	(presence_show_from_string): don't strcmp for "normal".
+	(presence_string_from_show): don't return "normal".
+
+2002-11-29  Richard Hult  <rhult@codefactory.se>
+
+	* loudmouth/lm-client.c (lm_client_subscribe_jid): Wrap g_print
+	with debug macro.
+	(lm_client_unsubscribe_jid): Likewise.
+	(lm_client_connect): Add debug print.
+	(client_connect_done_cb): Add debug print.
+
+	* loudmouth/lm-element.c (lm_element_new): When creating a stream
+	element, use "stream:stream" instead of just "stream". This fixes
+	the "Invalid XML" error we were getting from the server at the end
+	of the stream.
+
+	* loudmouth/lm-client.c (lm_client_authenticate): Don't free the
+	digest, it's static memory. This fixes a couple of very weird
+	crashes.
+	(lm_client_disconnect): Revert the fix I did here earlier, we
+	don't want to set is_connected until we really get a disconnect
+	callback from the connection. The problem is somewhere else.
+	(lm_client_send): Compare against </stream:stream> instead of just
+	</stream>.
+
+2002-11-29  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-node.c (node_free): don't free directly, use
+	ref-counts.
+	(lm_node_add_child_node): ref the child node.
+
+	* loudmouth/lm-element.c:
+	(lm_element_unref): implemented
+	(lm_element_set_tree): ref the tree.
+
+2002-11-29  Mikael Hallendal <micke@codefactory.se>
+
+	* loudmouth/lm-client.c: Changed default_foo_handler to
+	  foo_handler.
+	
+2002-11-27  Richard Hult  <rhult@codefactory.se>
+
+	* loudmouth/lm-client.c (client_handle_iq): Fix warning by making
+	id const.
+
+2002-11-26  Richard Hult  <rhult@codefactory.se>
+
+	* loudmouth/lm-client.c (client_connection_closed_cb): 
+	- Set is_connected to FALSE.
+
+2002-11-26  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/*: Changed so that LmElement and subclasses are no
+	  longer objects. Just structs. You need to use get/set-functions
+	  instead of properties.
+	
+2002-11-25  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-element.c (element_get_property): fixed error
+	  causing object_get ("from") trying to get "to" value.
+
+2002-11-24  Richard Hult  <rhult@codefactory.se>
+
+	* loudmouth/lm-client.c (client_handle_presence): 
+	- Try to implement subscription requests.
+
+	* loudmouth/test-lm.c (main): Fix more callback types.
+
+	* loudmouth/lm-client.h: 
+	- Remove lm_client_set_subscription_request_handler, unused.
+
+	* loudmouth/test-lm.c (main): Don't cast callbacks with (Type*).
+
+	* loudmouth/lm-client.c: 
+	- Change function prototypes from *callback to callback.
+
+	* loudmouth/lm-client.h: Remove signal entry from object struct 
+	  and change function prototypes to match the definitions.
+	
+2002-11-23  Richard Hult  <rhult@codefactory.se>
+
+	* loudmouth/lm-client.h: Add lm_client_get_agents.
+
+	* configure.in: Add compiler warnings logic but leave it disabled
+	  since the sha stuff is not very warning free.
+
+	* loudmouth/lm-node.c (lm_node_get_string): Escape the body string
+	  so we generate valid xml when sending things like '<', '>', and 
+	  '&'.
+
+2002-11-23  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-node.c (lm_node_unlink): added
+
+	* loudmouth/lm-presence.c (presence_set_property): don't set
+	  <show>normal</show>
+
+	* loudmouth/lm-iq.c:
+	(lm_iq_get_query_node):
+	(lm_iq_set_query_node): removed, use lm_element_find_child and
+	  lm_element_add_child_node instead.
+
+	* loudmouth/lm-element.c:
+	(lm_element_add_child): added :)
+	(lm_element_find_child): added
+
+	* loudmouth/lm-client.c (client_connection_closed_cb): call
+	  disconnect callback.
+
+	* loudmouth/lm-sha.[ch]: added, found in jabberd2, remember to
+	  check license issues with this.
+
+	* loudmouth/lm-client.c:
+	(lm_client_authenticate): use digest for sending password instead
+	  of clear text.
+
+	* loudmouth/lm-client.c:
+	(client_handle_iq): handle register reply
+	(lm_client_register): added
+	(lm_client_authenticate): moved stuff from iq-helper, easy enough
+	  now with the changes earlier today.
+
+	* loudmouth/lm-iq-helper.[ch]: removed, not needed anymore.
+
+	* loudmouth/lm-element.c (lm_element_add_child_node): added, this
+	  can be used to add any node to any element.
+
+	* loudmouth/lm-presence.c (presence_set_property): priority is an
+	  int, not string.
+
+	* loudmouth/lm-node.c (lm_node_add_child_node): rethinking, don't
+	  ref.
+	
+2002-11-22  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-node.c:
+	(lm_node_add_child): changed to take a name
+	  and a value, very handy when adding key/value pair nodes.
+	(lm_node_add_child_node): added a _node to the old
+	  lm_node_add_child. Also ref's the child so the user should unref
+	  it after he's finished with it.
+
+	* loudmouth/lm-iq.c (lm_iq_new): take the type as argument.
+
+	* loudmouth/lm-client.c: added a default iq handler attribute and
+	  use it in handle_iq if the incoming IQ isn't handled by the
+	  library. This way a user of the library can now do anything with
+	  it, even use it's own namespaces and such.
+
+	* loudmouth/*: Changes LmXMLNode -> LmNode
+
+	* loudmouth/*:
+	- Using LmXMLNode internally in all elements
+	- Use lm_message_new, lm_iq_new, lm_presence new instead of
+	  g_object_new
+	
+	* loudmouth/lm-presence.c:
+	(presence_get_xml_string): set to='' if it exists
+
+	* loudmouth/lm-xml-node.c:
+	(lm_xml_node_ref): added
+	(lm_xml_node_unref): added
+	(lm_xml_node_free): made private
+
+	* loudmouth/lm-parser.c:
+	(parser_end_element_cb): just unref the node, don't free it.
+
+	* loudmouth/lm-client.c: 
+	- added "name", "version" and "os" proprties.
+	(lm_client_register_default_message_handler):
+	(lm_client_register_default_presence_handler): removed, unused
+
+	* loudmouth/lm-element.[ch]: 
+	(lm_element_get_tree): Added, returns the XML tree for the
+	  element.
+	(ilm_element_setup_from_xml): ref the node.
+
+2002-11-20  Richard Hult  <rhult@codefactory.se>
+
+	* loudmouth/lm-parser.c (lm_parser_parse): Try to convert the xml
+	  input to from ISO-8859-1 to UTF-8 if it's not valid UTF-8. Not
+	  the perfect fix but it makes a common case work.
+
+2002-11-16  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-client.c (lm_client_disconnect): send end of
+  	  stream.
+
+2002-11-15  Richard Hult  <rhult@codefactory.se>
+
+	* loudmouth/lm-roster.c (lm_roster_new_from_query_node): Get the
+	  group from the child of the query node.
+
+2002-11-15  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-client.c: no more signals. You now register message
+	  and presence handlers.
+
+	* loudmouth/lm-presence.c (presence_get_property): implemented
+
+	* loudmouth/lm-client.c: 
+	- removed the disconnected and connected signals. Now callbacks
+	  passed to lm_client_connect.
+
+2002-11-14  Mikael Hallendal  <micke@codefactory.se>
+
+	* loudmouth/lm-presence.c:
+	(presence_class_init): type and show to be int's.
+	(presence_set_property): same.
+
+	* configure.in: bumped version to 0.1.1
+
+	* loudmouth/lm-presence.c (lm_presence_set_status): added.
+
+	* loudmouth/lm-element.c (element_class_init): not sure if we want
+	  this but readded the PROP_ERROR.
+
+	* loudmouth/lm-client.c (lm_client_authenticate): silent warnings
+
+	* loudmouth/lm-iq.c (iq_set_attribute): chain up.
+
+	* loudmouth/lm-element.c (element_get_property): implement.
+
+	* loudmouth/lm-client.c:
+	- use callbacks for auth and roster instead of signals.
+	(client_handle_iq): handle auth and roster
+	(client_add_callback): added
+	(client_find_callback): added
+	(client_remove_callback): added
+	(lm_client_send): take an extra id argument. If passed the message
+	  id will be copied to this argument.
+	(lm_client_authenticate): take callback+userdata as arguments.
+	(lm_client_request_roster): same
+
+2002-10-21  Richard Hult  <rhult@codefactory.se>
+
+	* loudmouth/lm-message.c (message_get_xml_string): Escape the
+	  body, fixes server disconnecting on messages containing <>.
+
+2002-10-02  Richard Hult  <rhult@codefactory.se>
+
+	* loudmouth/lm-xml-node.c (lm_xml_node_set_value): Don't run
+	  strdown on the node value.
+

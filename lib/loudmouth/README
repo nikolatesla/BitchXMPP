@@ -1,0 +1,65 @@
+Introduction:
+=============
+
+Loudmouth is a lightweight and easy-to-use C library for programming with the
+Jabber protocol. It's designed to be easy to get started with and yet
+extensible to let you do anything the Jabber protocol allows.
+
+The goal is to fully support Linux, *BSD, Mac OSX and Windows. It has
+currently only been tested on Linux (Red Hat 8.0, Debian Unstable) and FreeBSD
+that I know of. If someone with access to other machines can provide
+feedback I would be most grateful.
+
+
+Requirements:
+=============
+
+Glib >= 2.16.0:
+http://ftp.gnome.org/pub/GNOME/sources/glib/2.16/
+
+gtk-doc (optional, if you want documentation built):
+ftp://ftp.gnome.org/pub/GNOME/sources/gtk-doc/1.0
+
+If you want SSL-support you'll also need:
+GnuTLS >= 1.2.0 with libtasn support.
+
+Building:
+=========
+
+./configure --prefix=
+make
+make install
+
+SSL Support:
+============
+You can choose between using GnuTLS (recommended) and OpenSSL to enable SSL
+support in Loudmouth. You choose which backend to use by passing the
+--with-ssl= flag to configure. GnuTLS is the default and will be used unless
+you pass the flag, use "openssl" for OpenSSL.
+
+Debugging:
+==========
+
+You can get debug information printed to STDOUT by using the environment 
+variable LM_DEBUG.
+
+export LM_DEBUG=<keyword>
+
+Where keyword is one or more (separated by :) of the following:
+
+* "NET": Shows all the data sent over the network.
+* "PARSER": Shows debug output from the parser.
+* "VERBOSE": Shows various verbose output.
+* "ALL": Enables all output.
+
+
+Questions, remarks, bug reports:
+================================
+
+See the web page for more information and issue reporting.
+
+http://projects.imendio.com/loudmouth
+
+Questions and others can be sent to me at:
+email: micke@imendio.com
+jabber: micke@imendio.com
