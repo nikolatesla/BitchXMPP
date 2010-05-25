@@ -1,0 +1,60 @@
+GnuTLS README-alpha -- Information for developers.              -*- outline -*-
+Copyright (C) 2009, 2010  Free Software Foundation, Inc.
+See the end for copying conditions.
+
+This file contains instructions for developers and advanced users that
+want to build from version controlled sources.
+
+We require several tools to build the software, including:
+
+- Automake <http://www.gnu.org/software/automake/>
+- Autoconf <http://www.gnu.org/software/autoconf/>
+- Libtool <http://www.gnu.org/software/libtool/>
+- Gettext <http://www.gnu.org/software/gettext/>
+- Texinfo <http://www.gnu.org/software/texinfo/>
+- help2man <http://www.gnu.org/software/help2man/>
+- Tar <http://www.gnu.org/software/tar/>
+- Gzip <http://www.gnu.org/software/gzip/>
+- Texlive & epsf <http://www.tug.org/texlive/> (for PDF manual)
+- CVS <http://www.gnu.org/software/cvs/> (for gettext autopoint)
+- GTK-DOC <http://www.gtk.org/gtk-doc/> (for API manual)
+- Git <http://git.or.cz/>
+- Perl <http://www.cpan.org/>
+- Valgrind <http://valgrind.org/> (optional)
+- libgcrypt <http://www.gnupg.org/>
+- Guile <http://www.gnu.org/software/guile/>
+- Gaa <http://gaa.sf.net> (optional)
+- libtasn1 <http://josefsson.org/libtasn1/> (optional)
+- datefudge <packages.debian.org/datefudge> (optional)
+
+The required software is typically distributed with your operating
+system, and the instructions for installing them differ.  Here are
+some hints:
+
+gNewSense/Debian/Ubuntu:
+sudo apt-get install git-core autoconf automake libtool gettext cvs 
+sudo apt-get install texinfo texlive texlive-generic-recommended texlive-extra-utils
+sudo apt-get install help2man gtk-doc-tools valgrind
+sudo apt-get install libgcrypt-dev guile-1.8-dev libtasn1-3-dev
+sudo apt-get install datefudge
+
+To download the version controlled sources:
+
+$ git clone git://git.savannah.gnu.org/gnutls.git
+$ cd gnutls
+
+The next step is to run autoreconf, ./configure, etc:
+
+$ make bootstrap
+
+Then build the project normally:
+
+$ make
+$ make check
+
+Happy hacking!
+
+----------------------------------------------------------------------
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.

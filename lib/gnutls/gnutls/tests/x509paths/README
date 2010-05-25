@@ -1,0 +1,32 @@
+This directory contains self-tests based on NIST's old X.509 test
+vectors, downloaded (2007-02-13) from:
+
+http://csrc.nist.gov/pki/testing/x509paths_old.html
+
+6c42afd89f6e9ebe330bf5f361b837840c132bf5  x509tests.tgz
+92d43f0f24b15e9e2d42af8f0c4caffc78d94ad1  certpath1.07.zip
+3e50006351c0e7422e0d1fb0f39c3d74fd69a51a  Certificate Path Validation Testing.pdf
+
+Because of unclear license, they are not distributed with GnuTLS
+currently.
+
+See the PDF for information regarding the self tests.  Particular
+comments on individual tests below.  The 'XXX' marks real bugs.
+
+Chain 13-14,65: We probably should not fail fatally, although this is
+not a real problem.
+
+Chain 15-18: We should succeed, the reason we don't is that we use
+memcmp for DN comparisons.
+
+Chain 19: I don't understand why this test should fail?  The chain
+seems fine to me.
+
+Chain 28-29: We fail to check keyCertSign (non-)critical key usage in
+intermediate certificates.  XXX
+
+Chain 31-32: The CRL is issued by a issuer without CRLSign
+(non-)critical keyCertSign.  We don't check the CRL, so this is not a
+real problem.
+
+Chain 54-63: We don't check path length constraints properly. XXX
